@@ -1,0 +1,200 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Dark Team</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: Arial, sans-serif;
+        }
+        
+        body {
+            background: #0f0f0f;
+            color: white;
+        }
+        
+        header {
+            background: #1a1a1a;
+            padding: 15px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            border-bottom: 2px solid #ff0000;
+        }
+        
+        .logo {
+            font-size: 24px;
+            font-weight: bold;
+            color: #ff0000;
+        }
+        
+        .code-btn {
+            background: #ff0000;
+            color: white;
+            border: none;
+            padding: 8px 15px;
+            border-radius: 5px;
+            cursor: pointer;
+        }
+
+        .tabs {
+            display: flex;
+            justify-content: center;
+            margin: 20px 0;
+        }
+
+        .tab {
+            background: #333;
+            color: white;
+            border: none;
+            padding: 10px 20px;
+            margin: 0 5px;
+            cursor: pointer;
+            border-radius: 5px;
+        }
+
+        .tab.active {
+            background: #ff0000;
+        }
+        
+        .content-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+            gap: 20px;
+            padding: 20px;
+        }
+        
+        .content-card {
+            background: #1a1a1a;
+            border-radius: 10px;
+            padding: 15px;
+            text-align: center;
+            cursor: pointer;
+        }
+        
+        .content-card img {
+            width: 100%;
+            height: 200px;
+            object-fit: cover;
+            border-radius: 5px;
+            margin-bottom: 10px;
+            background: #333;
+        }
+        
+        .dev-tools, .chapter-tools {
+            display: none;
+            background: #1a1a1a;
+            padding: 20px;
+            margin: 20px;
+            border-radius: 10px;
+        }
+        
+        .dev-form {
+            display: grid;
+            gap: 10px;
+        }
+        
+        input, select, button {
+            padding: 10px;
+            border: none;
+            border-radius: 5px;
+        }
+        
+        button {
+            background: #ff0000;
+            color: white;
+            cursor: pointer;
+        }
+
+        .reader {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: black;
+            z-index: 1000;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+        }
+
+        .reader img {
+            max-width: 90%;
+            max-height: 80vh;
+            object-fit: contain;
+        }
+
+        .reader-controls {
+            position: absolute;
+            bottom: 20px;
+            display: flex;
+            gap: 10px;
+        }
+
+        .reader-controls button {
+            padding: 10px 20px;
+            font-size: 16px;
+        }
+
+        .close-btn {
+            position: absolute;
+            top: 20px;
+            left: 20px;
+            background: red;
+            color: white;
+            border: none;
+            padding: 10px 15px;
+            cursor: pointer;
+            border-radius: 5px;
+        }
+
+        .page-info {
+            position: absolute;
+            top: 20px;
+            color: white;
+            font-size: 18px;
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <div class="logo">DARK TEAM</div>
+        <button class="code-btn" onclick="openCodeModal()">كود المطور</button>
+    </header>
+
+    <div class="tabs">
+        <button class="tab active" onclick="showTab('manga')">مانجا</button>
+        <button class="tab" onclick="showTab('comic')">كوميكس</button>
+    </div>
+
+    <div id="mangaGrid" class="content-grid">
+        <!-- المانجا تظهر هنا -->
+    </div>
+
+    <div id="comicGrid" class="content-grid" style="display: none;">
+        <!-- الكوميكس يظهر هنا -->
+    </div>
+
+    <div class="dev-tools" id="devTools">
+        <h3>إضافة مانجا/كوميكس جديد</h3>
+        <div class="dev-form">
+            <select id="contentType">
+                <option value="manga">مانجا</option>
+                <option value="comic">كوميكس</option>
+            </select>
+            <input type="text" id="contentName" placeholder="اسم المحتوى">
+            <input type="file" id="coverImage" accept="image/*">
+            <button onclick="addContent()">إضافة</button>
+        </div>
+    </div>
+
+    <div class="chapter-tools" id="chapterTools">
+        <h3 id="chapterTitle">إضافة فصول لـ </h3>
+        <div class="dev-form">
+            <input type="text" id="chapterName" plac
